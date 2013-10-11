@@ -14,8 +14,8 @@
 #
 new_window() {
   if [ -n "$1" ]; then window="$1"; fi
-  if [ -n "$2" ]; then local command=("$2"); fi
-  if [ -n "$window" ]; then local winarg=(-n "$window"); fi
+  if [ -n "$2" ]; then local -a command=("$2"); fi
+  if [ -n "$window" ]; then local -a winarg=(-n "$window"); fi
 
   tmux new-window -t "$session:" "${winarg[@]}" "${command[@]}"
   __go_to_window_or_session_path
@@ -28,7 +28,7 @@ new_window() {
 #   - $2: (optional) Target pane ID to split in current window.
 #
 split_v() {
-  if [ -n "$1" ]; then local percentage=(-p "$1"); fi
+  if [ -n "$1" ]; then local -a percentage=(-p "$1"); fi
   tmux split-window -t "$session:$window.$2" -v "${percentage[@]}"
   __go_to_window_or_session_path
 }
@@ -40,7 +40,7 @@ split_v() {
 #   - $2: (optional) Target pane ID to split in current window.
 #
 split_h() {
-  if [ -n "$1" ]; then local percentage=(-p "$1"); fi
+  if [ -n "$1" ]; then local -a percentage=(-p "$1"); fi
   tmux split-window -t "$session:$window.$2" -h "${percentage[@]}"
   __go_to_window_or_session_path
 }
@@ -52,7 +52,7 @@ split_h() {
 #   - $2: (optional) Target pane ID to split in current window.
 #
 split_vl() {
-  if [ -n "$1" ]; then local count=(-l "$1"); fi
+  if [ -n "$1" ]; then local -a count=(-l "$1"); fi
   tmux split-window -t "$session:$window.$2" -v "${count[@]}"
   __go_to_window_or_session_path
 }
@@ -64,7 +64,7 @@ split_vl() {
 #   - $2: (optional) Target pane ID to split in current window.
 #
 split_hl() {
-  if [ -n "$1" ]; then local count=(-l "$1"); fi
+  if [ -n "$1" ]; then local -a count=(-l "$1"); fi
   tmux split-window -t "$session:$window.$2" -h "${count[@]}"
   __go_to_window_or_session_path
 }
